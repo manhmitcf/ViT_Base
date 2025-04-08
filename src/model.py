@@ -8,8 +8,11 @@ class FishClassifier(nn.Module):
         # Load the ViT Base model with pre-trained weights
         self.vit = vit_b_16(weights=ViT_B_16_Weights.DEFAULT)
         
+        # Access the last layer of the Sequential object to get in_features
+        in_features = self.vit.heads[-1].in_features
+        
         # Replace the classifier head with a new one for the specific number of classes
-        self.vit.heads = nn.Linear(self.vit.heads.in_features, num_classes)
+        self.vit.heads = nn.Linear(in_features, num_classes)
 
     def forward(self, x):
         return self.vit(x)
