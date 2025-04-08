@@ -59,13 +59,13 @@ class FishDatasetWithAugmentation(Dataset):
         return image, label
     
 basic_transform = transforms.Compose([
-    transforms.Resize((260, 260), interpolation=transforms.InterpolationMode.LANCZOS),
+    transforms.Resize((224, 224), interpolation=transforms.InterpolationMode.LANCZOS),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
 aug_transform = transforms.Compose([
-    transforms.Resize((260, 260), interpolation=transforms.InterpolationMode.LANCZOS),
+    transforms.Resize((224, 224), interpolation=transforms.InterpolationMode.LANCZOS),
     transforms.RandomHorizontalFlip(p=0.5),
     transforms.RandomRotation(degrees=3),
     transforms.RandomAffine(degrees=0, translate=(0.03, 0.03), scale=(0.97, 1.03), shear=2),
